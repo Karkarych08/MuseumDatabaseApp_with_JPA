@@ -4,14 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26edcf2b-d5b0-41b0-abcf-a4ae033b9e2a" name="Changes" comment="fourth labwork without artist.class(I don`t know why I used it)&#10;add Spring JPA starter">
+    <list default="true" id="26edcf2b-d5b0-41b0-abcf-a4ae033b9e2a" name="Changes" comment="Change default language to Russian">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/university/app/Interfaces/exhibitRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/university/app/dao/Exhibit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/university/app/repositoty/exhibitRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/university/app/Interfaces/artistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/university/app/Interfaces/artistRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/university/app/Services/JDBConnect.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/university/app/Services/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/university/app/Services/UserInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/university/app/dao/artistDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/university/app/dao/artistDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/university/app/dao/artistMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/university/app/dao/artistDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/university/app/dao/Artist.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/university/app/repositoty/artistRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/university/app/repositoty/artistRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/bungle_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bungle_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/bungle_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bungle_ru.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +31,18 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -43,12 +61,15 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "D:/rakmo/Documents/MuseumDatabaseApp_with_JPA/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "File.Encoding",
+    "spring.configuration.checksum": "bb22ff6be6e9cb0a93f8ac9f3b75038b"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -61,6 +82,9 @@
       <recent name="D:\rakmo\Documents\MuseumDatabaseApp_with_JPA\src\main\java\university" />
       <recent name="D:\rakmo\Documents\MuseumDatabaseApp_with_JPA\src\main\java" />
       <recent name="D:\rakmo\Documents\MuseumDatabaseApp_with_JPA\src\main" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="university.app.Interfaces" />
     </key>
   </component>
   <component name="RunManager">
@@ -89,7 +113,10 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1673736741672</updated>
-      <workItem from="1673736747800" duration="11783000" />
+      <workItem from="1673736747800" duration="11988000" />
+      <workItem from="1673776304451" duration="282000" />
+      <workItem from="1673776619512" duration="12144000" />
+      <workItem from="1673797408443" duration="7196000" />
     </task>
     <task id="LOCAL-00001" summary="fourth labwork without artist.class(I don`t know why I used it)&#10;add Spring JPA starter">
       <created>1673738255626</created>
@@ -98,7 +125,21 @@
       <option name="project" value="LOCAL" />
       <updated>1673738255626</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Rewrite repository command with JPA&#10;Delete unnecessary classes">
+      <created>1673748933868</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1673748933868</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Change default language to Russian">
+      <created>1673749020808</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1673749020808</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,6 +158,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fourth labwork without artist.class(I don`t know why I used it)&#10;add Spring JPA starter" />
-    <option name="LAST_COMMIT_MESSAGE" value="fourth labwork without artist.class(I don`t know why I used it)&#10;add Spring JPA starter" />
+    <MESSAGE value="Rewrite repository command with JPA&#10;Delete unnecessary classes" />
+    <MESSAGE value="Change default language to Russian" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change default language to Russian" />
   </component>
 </project>

@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import university.app.Interfaces.artistRepository;
-import university.app.dao.artistDAO;
+import university.app.dao.Artist;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,46 +25,46 @@ public class artistRepositoryImpl implements artistRepository {
 
     @Override
     @Transactional
-    public Collection<artistDAO> findOlderThenDate(Date date) {
-        TypedQuery<artistDAO> query = em.createQuery("select s from artistDAO s " +
-                "where s.dateofbirth > :date", artistDAO.class);
+    public Collection<Artist> findOlderThenDate(Date date) {
+        TypedQuery<Artist> query = em.createQuery("select s from Artist s " +
+                "where s.dateofbirth > :date", Artist.class);
         query.setParameter("date",date);
         return query.getResultList();
     }
 
     @Override
     @Transactional
-    public Collection<artistDAO> findAll(){
-        TypedQuery<artistDAO> query = em.createQuery("select s from artistDAO s", artistDAO.class);
+    public Collection<Artist> findAll(){
+        TypedQuery<Artist> query = em.createQuery("select s from Artist s", Artist.class);
         return query.getResultList();
     }
 
     @Override
     @Transactional
-    public Collection<artistDAO> findAllByCountry(String country){
-        TypedQuery<artistDAO> query = em.createQuery("select s from artistDAO s " +
-                "where s.country = :country", artistDAO.class);
+    public Collection<Artist> findAllByCountry(String country){
+        TypedQuery<Artist> query = em.createQuery("select s from Artist s " +
+                "where s.country = :country", Artist.class);
         query.setParameter("country",country);
         return query.getResultList();
     }
 
     @Override
     @Transactional
-    public artistDAO findById(long id){
-        return em.find(artistDAO.class, id);
+    public Artist findById(long id){
+        return em.find(Artist.class, id);
     }
 
     @Override
     @Transactional
     public void insert(String firstname, String secondname, String familyname, Date dateofbirth, String country, Date dateofdeath) {
-        artistDAO artist = new artistDAO(firstname,secondname,familyname,dateofbirth,country,dateofdeath);
+        Artist artist = new Artist(firstname,secondname,familyname,dateofbirth,country,dateofdeath);
         em.persist(artist);
     }
 
     @Override
     @Transactional
     public void update(long id, String firstname, String secondname, String familyname, Date dateofbirth, String country, Date dateofdeath){
-        artistDAO artist = new artistDAO(firstname,secondname,familyname,dateofbirth,country,dateofdeath);
+        Artist artist = new Artist(firstname,secondname,familyname,dateofbirth,country,dateofdeath);
         if ((artist.getFirstname()== null)){
             artist.setFirstname(findById(id).getFirstname());
         }
@@ -82,7 +82,7 @@ public class artistRepositoryImpl implements artistRepository {
         if (artist.getDateofdeath().equals(new Date(new GregorianCalendar(9999, 0,31).getTimeInMillis()))){
             artist.setDateofdeath(findById(id).getDateofdeath());
         }
-        Query query = em.createQuery("update artistDAO e " +
+        Query query = em.createQuery("update Artist e " +
                 "set e.firstname = :firstname," +
                 "e.secondname = :secondname," +
                 "e.familyname = :familyname," +
@@ -103,7 +103,10 @@ public class artistRepositoryImpl implements artistRepository {
     @Override
     @Transactional
     public void deletebyId(long id) {
-        Query query = em.createQuery("delete from artistDAO s " +
+        Query forexhibit = em.createQuery("update Exhibit e set e.artist = null where e.artist.id = :id");
+        forexhibit.setParameter("id",id);
+        forexhibit.executeUpdate();
+        Query query = em.createQuery("delete from Artist s " +
                 "where s.id = :id");
         query.setParameter("id",id);
         query.executeUpdate();
