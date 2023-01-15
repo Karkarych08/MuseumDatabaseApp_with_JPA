@@ -14,7 +14,7 @@ public class LocaleIfService implements Locale_If {
             "ru", Locale.forLanguageTag("ru")
     );
 
-    private Locale current = SUPPORTED.get("en");
+    private Locale current = SUPPORTED.get("ru");
 
     @Override
     public void set(String locale) throws LocaleNotSupportedException {
