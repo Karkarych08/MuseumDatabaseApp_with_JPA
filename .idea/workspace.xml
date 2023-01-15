@@ -4,22 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26edcf2b-d5b0-41b0-abcf-a4ae033b9e2a" name="Changes" comment="Change default language to Russian">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/university/app/Interfaces/exhibitRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/university/app/dao/Exhibit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/university/app/repositoty/exhibitRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="26edcf2b-d5b0-41b0-abcf-a4ae033b9e2a" name="Changes" comment="Add entity Exhibit">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/university/app/Interfaces/artistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/university/app/Interfaces/artistRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/university/app/Services/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/university/app/Services/UserInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/university/app/dao/artistDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/university/app/dao/Artist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/university/app/repositoty/artistRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/university/app/repositoty/artistRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bungle_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bungle_en.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bungle_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bungle_ru.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +29,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JpbToolWindowState">
+    <option name="isDesignerTabSelected" value="false" />
     <option name="isToolWindowVisible" value="false" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -61,14 +49,14 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "database.data.extractors.current.export.id": "SQL Inserts",
     "last_opened_file_path": "D:/rakmo/Documents/MuseumDatabaseApp_with_JPA/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "File.Encoding",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
     "spring.configuration.checksum": "bb22ff6be6e9cb0a93f8ac9f3b75038b"
   },
   "keyToStringList": {
@@ -116,7 +104,7 @@
       <workItem from="1673736747800" duration="11988000" />
       <workItem from="1673776304451" duration="282000" />
       <workItem from="1673776619512" duration="12144000" />
-      <workItem from="1673797408443" duration="7196000" />
+      <workItem from="1673797408443" duration="8805000" />
     </task>
     <task id="LOCAL-00001" summary="fourth labwork without artist.class(I don`t know why I used it)&#10;add Spring JPA starter">
       <created>1673738255626</created>
@@ -139,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673749020808</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add entity Exhibit">
+      <created>1673818730256</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1673818730256</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,6 +155,7 @@
     <MESSAGE value="fourth labwork without artist.class(I don`t know why I used it)&#10;add Spring JPA starter" />
     <MESSAGE value="Rewrite repository command with JPA&#10;Delete unnecessary classes" />
     <MESSAGE value="Change default language to Russian" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change default language to Russian" />
+    <MESSAGE value="Add entity Exhibit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add entity Exhibit" />
   </component>
 </project>
