@@ -1,18 +1,41 @@
 package university.app.dao;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.Date;
+import javax.persistence.*;
+import java.sql.Date;
 
+@Entity
 @Data
-@AllArgsConstructor
+@Table(name = "artist")
 public class artistDAO {
-    long id;
-    String firstname;
-    String secondname;
-    String familyname;
-    Date dateofbirth;
-    String country;
-    Date dateofdeath;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "firstname")
+    private String firstname;
+    @Column(name = "secondname")
+    private String secondname;
+    @Column(name = "familyname")
+    private String familyname;
+    @Column(name = "dateofbirth")
+    private Date dateofbirth;
+    @Column(name = "country")
+    private String country;
+
+    public artistDAO(String firstname, String secondname, String familyname, Date dateofbirth, String country, Date dateofdeath) {
+        this.firstname = firstname;
+        this.secondname = secondname;
+        this.familyname = familyname;
+        this.dateofbirth = dateofbirth;
+        this.country = country;
+        this.dateofdeath = dateofdeath;
+    }
+
+    @Column(name = "dateofdeath")
+    private Date dateofdeath;
+
+    public artistDAO() {
+
+    }
 }

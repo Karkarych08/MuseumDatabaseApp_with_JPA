@@ -2,80 +2,110 @@ package university.app.repositoty;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import university.app.Interfaces.artistRepository;
-import university.app.Services.JDBConnect;
 import university.app.dao.artistDAO;
-import university.app.dao.artistMapper;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.sql.Date;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Map;
+import java.util.GregorianCalendar;
 
 
 @Repository
 @RequiredArgsConstructor
 public class artistRepositoryImpl implements artistRepository {
 
-
-    private final JDBConnect jdbConnect;
-
-    private final artistMapper artistMapper;
-
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
-    public Collection<artistDAO> findOlderThenDate(Calendar date) {
-        return jdbConnect.getJdbc().query("SELECT * FROM artist where dateofbirth>:date", Map.of("date",date),artistMapper);
+    @Transactional
+    public Collection<artistDAO> findOlderThenDate(Date date) {
+        TypedQuery<artistDAO> query = em.createQuery("select s from artistDAO s " +
+                "where s.dateofbirth > :date", artistDAO.class);
+        query.setParameter("date",date);
+        return query.getResultList();
     }
 
     @Override
+    @Transactional
     public Collection<artistDAO> findAll(){
-        return jdbConnect.getJdbc().query("SELECT * FROM artist", artistMapper);
+        TypedQuery<artistDAO> query = em.createQuery("select s from artistDAO s", artistDAO.class);
+        return query.getResultList();
     }
 
     @Override
+    @Transactional
     public Collection<artistDAO> findAllByCountry(String country){
-        return jdbConnect.getJdbc().query("SELECT * FROM artist where country=:country", Map.of("country",country),artistMapper);
+        TypedQuery<artistDAO> query = em.createQuery("select s from artistDAO s " +
+                "where s.country = :country", artistDAO.class);
+        query.setParameter("country",country);
+        return query.getResultList();
     }
 
     @Override
-    public Collection<artistDAO> findById(long id){
-        return jdbConnect.getJdbc().query("SELECT * FROM artist where id=:id", Map.of("id",id),artistMapper);
+    @Transactional
+    public artistDAO findById(long id){
+        return em.find(artistDAO.class, id);
     }
 
     @Override
-    public void insert(String firstname, String secondname, String familyname, Calendar dateofbirth, String country, Calendar dateofdeath) {
-        KeyHolder kh = new GeneratedKeyHolder();
-        MapSqlParameterSource map = new MapSqlParameterSource(Map.of("secondname",secondname,
-                "firstname",firstname,
-                "familyname",familyname,
-                "dateofbirth",new Date(dateofbirth.getTimeInMillis()),
-                "country",country,
-                "dateofdeath",new Date(dateofdeath.getTimeInMillis())));
-        jdbConnect.getJdbc().update("INSERT INTO artist (secondname,firstname,familyname,dateofbirth,country,dateofdeath) " +
-                        "VALUES (:secondname,:firstname,:familyname,:dateofbirth,:country,:dateofdeath)",map,kh);
+    @Transactional
+    public void insert(String firstname, String secondname, String familyname, Date dateofbirth, String country, Date dateofdeath) {
+        artistDAO artist = new artistDAO(firstname,secondname,familyname,dateofbirth,country,dateofdeath);
+        em.persist(artist);
     }
 
     @Override
-    public void update(long id, String firstname, String secondname, String familyname, java.util.Date dateofbirth, String country, java.util.Date dateofdeath){
-        MapSqlParameterSource map = new MapSqlParameterSource(Map.of(
-                "id",id,
-                "secondname",secondname,
-                "firstname",firstname,
-                "familyname",familyname,
-                "dateofbirth",dateofbirth,
-                "country",country,
-                "dateofdeath",dateofdeath));
-        jdbConnect.getJdbc().update("UPDATE artist set (secondname,firstname,familyname,dateofbirth,country,dateofdeath) =" +
-                " (:secondname,:firstname,:familyname,:dateofbirth,:country,:dateofdeath) where \"id\"=:id ",map);
+    @Transactional
+    public void update(long id, String firstname, String secondname, String familyname, Date dateofbirth, String country, Date dateofdeath){
+        artistDAO artist = new artistDAO(firstname,secondname,familyname,dateofbirth,country,dateofdeath);
+        if ((artist.getFirstname()== null)){
+            artist.setFirstname(findById(id).getFirstname());
+        }
+        if (artist.getSecondname() == null){
+            artist.setSecondname(findById(id).getSecondname());
+        }
+        if (artist.getFamilyname() == null){
+            artist.setFamilyname(findById(id).getFamilyname());
+        }
+        if (artist.getDateofbirth().equals((new Date(new GregorianCalendar(9999, 0,31).getTimeInMillis())))){
+            artist.setDateofbirth(findById(id).getDateofbirth());
+        }
+        if (artist.getCountry() == null)
+            artist.setCountry(findById(id).getCountry());
+        if (artist.getDateofdeath().equals(new Date(new GregorianCalendar(9999, 0,31).getTimeInMillis()))){
+            artist.setDateofdeath(findById(id).getDateofdeath());
+        }
+        Query query = em.createQuery("update artistDAO e " +
+                "set e.firstname = :firstname," +
+                "e.secondname = :secondname," +
+                "e.familyname = :familyname," +
+                "e.dateofbirth = :dateofbirth," +
+                "e.dateofdeath = :dateofdeath," +
+                "e.country = : country " +
+                "where e.id = :id");
+        query.setParameter("id",id);
+        query.setParameter("firstname",artist.getFirstname());
+        query.setParameter("secondname",artist.getSecondname());
+        query.setParameter("familyname",artist.getFamilyname());
+        query.setParameter("dateofbirth",artist.getDateofbirth());
+        query.setParameter("country",artist.getCountry());
+        query.setParameter("dateofdeath",artist.getDateofdeath());
+        query.executeUpdate();
     }
 
     @Override
+    @Transactional
     public void deletebyId(long id) {
-        jdbConnect.getJdbc().update("DELETE FROM artist where \"id\" = :id",Map.of("id",id));
+        Query query = em.createQuery("delete from artistDAO s " +
+                "where s.id = :id");
+        query.setParameter("id",id);
+        query.executeUpdate();
     }
 }

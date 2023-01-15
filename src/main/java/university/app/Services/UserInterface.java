@@ -10,7 +10,7 @@ import university.app.Interfaces.artistRepository;
 import university.app.Services.Exceptions.LocaleNotSupportedException;
 import university.app.dao.artistDAO;
 
-import java.sql.SQLException;
+import java.sql.Date;
 import java.util.*;
 
 @ShellComponent
@@ -23,14 +23,14 @@ public class UserInterface {
     private final Scanner in = new Scanner(System.in);
 
     @ShellMethod("Find all persons")
-    public void findAll() throws SQLException {
+    public void findAll() {
         for (artistDAO artist : artistService.findAll()) {
             System.out.println(artist);
         }
     }
 
     @ShellMethod("Find by parameter")
-    public void findby(@ShellOption(defaultValue = "id") @NotNull String parameter){
+    public void find(@ShellOption(defaultValue = "id") @NotNull String parameter){
         switch (parameter){
             case "country" -> {
                     System.out.print(message.localize("countryENTER"));
@@ -42,9 +42,8 @@ public class UserInterface {
                     else System.out.println(message.localize("NoMatchingData"));
             }
             case "date" -> {
-                Calendar date = new GregorianCalendar();
                 System.out.print(message.localize("dateENTER"));
-                date.set(in.nextInt(), in.nextInt(),in.nextInt());
+                Date date = new Date(new GregorianCalendar(in.nextInt(), in.nextInt(),in.nextInt()).getTimeInMillis());
                 if (!Objects.equals(artistService.findOlderThenDate(date).toString(), "[]"))
                     for (artistDAO artist: artistService.findOlderThenDate(date)){
                         System.out.println(artist);
@@ -55,9 +54,7 @@ public class UserInterface {
                 System.out.print(message.localize("EnterID"));
                 long id = in.nextLong();
                 if (!Objects.equals(artistService.findById(id).toString(), "[]"))
-                    for (artistDAO artist: artistService.findById(id)){
-                        System.out.println(artist);
-                }
+                        System.out.println(artistService.findById(id).toString());
                 else System.out.println(message.localize("NoMatchingData"));
         }
             default -> System.out.println(message.localize("defaultFindByMSG"));
@@ -85,8 +82,8 @@ public class UserInterface {
                        @ShellOption(defaultValue = "null") Integer dayofdeath,
                        @ShellOption(defaultValue = "null") Integer mounthofdeath,
                        @ShellOption(defaultValue = "null") Integer yearofdeath){
-        Calendar datebirth = new GregorianCalendar(yearofbirth,mounthofbirth,dayofbirth);
-        Calendar datedeath = new GregorianCalendar(yearofdeath,mounthofdeath,dayofdeath);
+        Date datebirth =new Date(new GregorianCalendar(yearofbirth,mounthofbirth,dayofbirth).getTimeInMillis());
+        Date datedeath = new Date(new GregorianCalendar(yearofdeath,mounthofdeath,dayofdeath).getTimeInMillis());
         try {
             artistService.insert(firstname,secondname,familyname,datebirth,country,datedeath);
             System.out.println(message.localize("InsertComplete"));
@@ -96,8 +93,6 @@ public class UserInterface {
     }
     @ShellMethod("Insert artist manually")
     public void insertManually(){
-        Calendar dateofbirth = new GregorianCalendar();
-        Calendar dateofdeath = new GregorianCalendar();
         System.out.println(message.localize("firstnameEnter"));
         String firstname = in.next();
         System.out.println(message.localize("secondnameEnter"));
@@ -105,13 +100,13 @@ public class UserInterface {
         System.out.println(message.localize("familynameEnter"));
         String familyname = in.next();
         System.out.println(message.localize("dateofbirthENTER"));
-        dateofbirth.set(in.nextInt(), in.nextInt(),in.nextInt());
+        Date datebirth =new Date(new GregorianCalendar(in.nextInt(), in.nextInt(),in.nextInt()).getTimeInMillis());
         System.out.println(message.localize("dateofdeathENTER"));
-        dateofdeath.set(in.nextInt(), in.nextInt(),in.nextInt());
+        Date datedeath =new Date(new GregorianCalendar(in.nextInt(), in.nextInt(),in.nextInt()).getTimeInMillis());
         System.out.println(message.localize("countryENTER"));
         String country = in.next();
         try {
-            artistService.insert(firstname,secondname,familyname,dateofbirth,country,dateofdeath);
+            artistService.insert(firstname,secondname,familyname,datebirth,country,datedeath);
             System.out.println(message.localize("InsertComplete"));
         }catch (Exception e){
             System.out.println(message.localize("InsertError"));
@@ -131,28 +126,8 @@ public class UserInterface {
                        @ShellOption(defaultValue = "31") Integer dayofdeath,
                        @ShellOption(defaultValue = "0") Integer mounthofdeath,
                        @ShellOption(defaultValue = "9999") Integer yearofdeath){
-        Date datebirth =new Date(new GregorianCalendar(yearofbirth,mounthofbirth,dayofbirth).getTimeInMillis());
-        Date datedeath =new Date(new GregorianCalendar(yearofdeath,mounthofdeath,dayofdeath).getTimeInMillis());
-        artistDAO artist = new artistDAO(id,firstname,secondname,familyname,datebirth,country,datedeath);
-        if ((artist.getFirstname()== null)){
-            artist.setFirstname(new ArrayList<>(artistService.findById(id)).get(0).getFirstname());
-        }
-        if (artist.getSecondname() == null){
-            artist.setSecondname(new ArrayList<>(artistService.findById(id)).get(0).getSecondname());
-        }
-        if (artist.getFamilyname() == null){
-            artist.setFamilyname(new ArrayList<>(artistService.findById(id)).get(0).getFamilyname());
-        }
-        if (artist.getDateofbirth().equals((new Date(new GregorianCalendar(9999, 0,31).getTimeInMillis())))){
-            artist.setDateofbirth(new ArrayList<>(artistService.findById(id)).get(0).getDateofbirth());
-        }
-        if (artist.getCountry() == null)
-            artist.setCountry(new ArrayList<>(artistService.findById(id)).get(0).getCountry());
-        if (artist.getDateofdeath().equals(new Date(new GregorianCalendar(9999, 0,31).getTimeInMillis()))){
-            artist.setDateofdeath(new ArrayList<>(artistService.findById(id)).get(0).getDateofdeath());
-        }
         try {
-            artistService.update(id,artist.getFirstname(),artist.getSecondname(),artist.getFamilyname(),artist.getDateofbirth(),artist.getCountry(),artist.getDateofdeath());
+            artistService.update(id,firstname,secondname,familyname,new Date(new GregorianCalendar(yearofbirth,mounthofbirth,dayofbirth).getTimeInMillis()),country,new Date(new GregorianCalendar(yearofdeath,mounthofdeath,dayofdeath).getTimeInMillis()));
             System.out.println(message.localize("UpdateComplete"));
         }catch (Exception e){
             System.out.println(message.localize("UpdateError"));
